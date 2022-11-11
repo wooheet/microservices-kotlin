@@ -1,3 +1,3 @@
-package com.wooheet.microservices.common.exception
+package com.wooheet.microservices.handler
 
 data class ErrorResponse(val error: String, val message: String)

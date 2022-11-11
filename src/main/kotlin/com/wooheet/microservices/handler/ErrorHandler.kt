@@ -1,6 +1,7 @@
-package com.wooheet.microservices.common.exception
+package com.wooheet.microservices.handler
 
 import com.fasterxml.jackson.core.JsonParseException
+import com.wooheet.microservices.common.exception.CustomerNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice

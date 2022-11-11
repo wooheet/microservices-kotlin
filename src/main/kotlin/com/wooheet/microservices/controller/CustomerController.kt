@@ -1,7 +1,7 @@
 package com.wooheet.microservices.controller
 
 import com.wooheet.microservices.service.CustomerService
-import com.wooheet.microservices.common.exception.ErrorResponse
+import com.wooheet.microservices.handler.ErrorResponse
 import com.wooheet.microservices.domain.Customer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
