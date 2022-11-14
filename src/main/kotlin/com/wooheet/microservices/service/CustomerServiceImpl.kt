@@ -19,7 +19,7 @@ class CustomerServiceImpl : CustomerService {
     )
   }
 
-  val customers = ConcurrentHashMap<Int, Customer>(initialCustomers.associateBy(Customer::id))
+  val customers = ConcurrentHashMap(initialCustomers.associateBy(Customer::id))
 
     override fun getCustomer(id: Int) = customers[id]?.toMono() ?: Mono.empty()
 
