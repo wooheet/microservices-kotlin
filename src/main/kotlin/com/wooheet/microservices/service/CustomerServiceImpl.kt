@@ -11,7 +11,7 @@ class CustomerServiceImpl : CustomerService {
     val initialCustomers = arrayOf(
         Customer(1, "Kotlin"),
         Customer(2, "Spring"),
-        Customer(3, "Microservice", Telephone("+44", "7123456789"))
+        Customer(3, "Microservice", Telephone("+82", "7123456789"))
     )
   }
 
