@@ -1,0 +1,5 @@
+microservice:
+  example:
+    greetings: "hello from config server application.yml"
+  wooheet:
+    pong: "ping pong"
