@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: "wooheet"
+  data:
+    mongodb:
+      uri: "mongodb://haewon:password@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-1"
+      database: "microservices"
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+spring.jackson.default-property-inclusion: NON_NULL
