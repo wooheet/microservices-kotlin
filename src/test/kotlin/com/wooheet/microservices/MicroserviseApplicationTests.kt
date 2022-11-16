@@ -1,4 +1,4 @@
-package com.wooheet.microservice
+package com.wooheet.microservices
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

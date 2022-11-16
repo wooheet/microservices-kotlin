@@ -1,19 +1,25 @@
-package com.wooheet.microservice.handler
+package com.wooheet.microservices.handler
 
 
-import com.wooheet.microservice.domain.Customer
-import com.wooheet.microservice.service.CustomerService
+import com.wooheet.microservices.domain.Customer
+import com.wooheet.microservices.service.CustomerService
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.BodyInserters.fromObject
 import org.springframework.web.reactive.function.BodyInserters.fromValue
 import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.ServerResponse.*
 import org.springframework.web.reactive.function.server.bodyToMono
+import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.toMono
 import java.net.URI
 
 @Component
 class CustomerHandler(val customerService: CustomerService) {
+  @Value("\${microservice.config.greetings}")
+  private lateinit var pingpong: String
+
   fun get(serverRequest: ServerRequest) =
       customerService.getCustomer(serverRequest.pathVariable("id").toInt())
           .flatMap { ok().body(fromValue(it)) }
@@ -34,5 +40,7 @@ class CustomerHandler(val customerService: CustomerService) {
   fun search(serverRequest: ServerRequest) =
       ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter")
           .orElse("")), Customer::class.java)
-//  fun pong() = customerService.pong()
+  fun pong(serverRequest: ServerRequest) = ok()
+      .body(pingpong.toMono(), String::class.java)
+
 }

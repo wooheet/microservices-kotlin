@@ -1,7 +1,7 @@
-package com.wooheet.microservice.repository
+package com.wooheet.microservices.repository
 
-import com.wooheet.microservice.domain.Customer
-import com.wooheet.microservice.domain.Telephone
+import com.wooheet.microservices.domain.Customer
+import com.wooheet.microservices.domain.Telephone
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.data.mongodb.core.find
 import org.springframework.data.mongodb.core.findById

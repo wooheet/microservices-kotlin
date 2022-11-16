@@ -1,6 +1,6 @@
-package com.wooheet.microservice.route
+package com.wooheet.microservices.route
 
-import com.wooheet.microservice.handler.CustomerHandler
+import com.wooheet.microservices.handler.CustomerHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.router
@@ -9,6 +9,9 @@ import org.springframework.web.reactive.function.server.router
 class CustomerRouter(private val customerHandler: CustomerHandler) {
   @Bean
   fun customerRoutes() = router {
+    "/ping".nest {
+      GET("", customerHandler::pong)
+    }
     "/customer".nest {
       GET("/{id}", customerHandler::get)
       POST("/", customerHandler::create)

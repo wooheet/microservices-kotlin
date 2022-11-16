@@ -1,4 +1,4 @@
-package com.wooheet.microservice
+package com.wooheet.microservices
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

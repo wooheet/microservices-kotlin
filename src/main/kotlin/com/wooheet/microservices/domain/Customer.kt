@@ -1,4 +1,4 @@
-package com.wooheet.microservice.domain
+package com.wooheet.microservices.domain
 
 import org.springframework.data.mongodb.core.mapping.Document
 
