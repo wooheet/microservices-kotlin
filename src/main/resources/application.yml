@@ -1,6 +1,24 @@
 spring:
   application:
     name: "wooheet"
+  profiles:
+    default: dev
+  cloud:
+    gcp:
+      config:
+        project-id: nm-prod-global-userdata-hub
+      sql:
+        database-name: columbus_userdata_hub
+        instance-connection-name: nm-prod-global-userdata-hub:us-central1:columbus-userdata-hub-db-dev
+    datasource:
+      hikari:
+        jdbc-url: ENC(VurhfAkLzLt8qemuAYSI7vGmgdLQA+ghWdZb6FHlfy6qGqP3XSMqDCDkrvwhxUQfjbfl40tRQy1h8pcQSwwUBIFmnn+MHTvMNYUZfkhPjEafYQvvjlnV4RAukEgQnQDRdcNCeOUGyEg=)
+        username: ENC(UsOhH2x5Pm7T/xH194YFnS4F5aqHBXtnRPzWgW/qXP8=)
+        password: ENC(7/LPP3EYjA32Meq8l/nazNJhWmZV4Y1K)
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        connection-test-query: select 1
+        maximum-pool-size: 50
+        connection-timeout: 2000
   data:
     mongodb:
       uri: "mongodb://haewon:password@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-1"
@@ -10,3 +28,4 @@ eureka:
     healthcheck:
       enabled: true
 spring.jackson.default-property-inclusion: NON_NULL
+

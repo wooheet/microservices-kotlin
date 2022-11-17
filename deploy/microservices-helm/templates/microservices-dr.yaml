@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ $.Values.service.name }}-dr
+  namespace: {{ $.Values.namespace }}
+spec:
+  host: {{ $.Values.istio.DestinationRule.host }}
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+    outlierDetection:
+      consecutive5xxErrors: 10
+      interval: 3s
+      baseEjectionTime: 3s
+      maxEjectionPercent: 100
+  subsets:
+    {{- range splitList "#" $.Values.tag }}
+    {{- $tag := (split "%" . )._0 }}
+    - name: tag-{{ $tag | replace "." "-" }}
+      labels:
+        version: {{ $tag }}
+    {{ end }}

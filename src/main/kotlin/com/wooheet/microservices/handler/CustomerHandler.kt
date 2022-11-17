@@ -17,8 +17,8 @@ import java.net.URI
 
 @Component
 class CustomerHandler(val customerService: CustomerService) {
-  @Value("\${microservice.config.greetings}")
-  private lateinit var pingpong: String
+//  @Value("\${microservice.config.greetings}")
+//  private lateinit var pingpong: String
 
   fun get(serverRequest: ServerRequest) =
       customerService.getCustomer(serverRequest.pathVariable("id").toInt())
@@ -41,6 +41,6 @@ class CustomerHandler(val customerService: CustomerService) {
       ok().body(customerService.searchCustomers(serverRequest.queryParam("nameFilter")
           .orElse("")), Customer::class.java)
   fun pong(serverRequest: ServerRequest) = ok()
-      .body(pingpong.toMono(), String::class.java)
+      .body("pingpong.toMono()", String::class.java)
 
 }

@@ -1,0 +1,36 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ $.Values.service.name }}-ap
+  namespace: {{ $.Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $.Values.service.name }}
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/health"]
+    - to:
+        - operation:
+            methods: ["GET"]
+            ports: ["13133"]
+            paths: ["/"]
+    - from:
+        - source:
+            principals:
+            {{- range $.Values.istio.VirtualService.principals }}
+            - {{ . }}
+            {{- end }}
+      to:
+        - operation:
+            paths: ["/mgmt/*"]
+    - from:
+        - source:
+            namespaces:
+              - default
+    - to:
+        - operation:
+            paths: ["/mgmt/*"]
