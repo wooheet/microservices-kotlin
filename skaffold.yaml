@@ -5,9 +5,9 @@ profiles:
   build:
     tagPolicy:
       envTemplate:
-        template: '{{.MGMT_IMG_TAG_BUILD}}'
+        template: '{{.MICROSERVICES_IMG_TAG_BUILD}}'
     artifacts:
-      - image: gcr.io/columbus-160105/userdatahub/columbus-mgmt-api-webapp
+      - image: gcr.io/columbus-160105/userdatahub/microservices-api-webapp
         context: .
         docker:
           dockerfile: Dockerfile
@@ -19,66 +19,13 @@ profiles:
     helm:
       releases:
       - name: columbus-mgmt-helm
-        chartPath: ./deploy/columbus-mgmt-helm
+        chartPath: ./deploy/microservices-mgmt-helm
         valuesFiles:
-        - ./deploy/columbus-mgmt-helm/values-dev.yaml
+        - ./deploy/microservices-mgmt-helm/values-dev.yaml
         setValueTemplates:
-          istio.VirtualService.mirror.subset: '{{.MGMT_IMG_TAG_MIRROR}}'
-          istio.temp.VirtualService: '{{.MGMT_ISTIO_TEMP_VIRTUAL_SERVICE}}'
-          istio.temp.allowPolicy: '{{.MGMT_ISTIO_TEMP_POLICY}}'
-          tag: '{{.MGMT_IMG_TAG_DEPLOY}}'
+          istio.VirtualService.mirror.subset: '{{.MICROSERVICES_IMG_TAG_MIRROR}}'
+          tag: '{{.MICROSERVICES_IMG_TAG_DEPLOY}}'
       flags:
         global:
         - --kube-context
         - gke_nm-prod-global-userdata-hub_us-central1-a_userdata-hub-istio-1-11-dev
-- name: qa-deploy
-  deploy:
-    helm:
-      releases:
-      - name: columbus-mgmt-helm
-        chartPath: ./deploy/columbus-mgmt-helm
-        valuesFiles:
-        - ./deploy/columbus-mgmt-helm/values-qa.yaml
-        setValueTemplates:
-          istio.VirtualService.mirror.subset: '{{.MGMT_IMG_TAG_MIRROR}}'
-          istio.temp.VirtualService: '{{.MGMT_ISTIO_TEMP_VIRTUAL_SERVICE}}'
-          istio.temp.allowPolicy: '{{.MGMT_ISTIO_TEMP_POLICY}}'
-          tag: '{{.MGMT_IMG_TAG_DEPLOY}}'
-      flags:
-        global:
-        - --kube-context
-        - gke_nm-prod-global-userdata-hub_us-central1-a_userdata-hub-istio-1-11-qa
-- name: test-deploy
-  deploy:
-    helm:
-      releases:
-      - name: columbus-mgmt-helm
-        chartPath: ./deploy/columbus-mgmt-helm
-        valuesFiles:
-        - ./deploy/columbus-mgmt-helm/values-test.yaml
-        setValueTemplates:
-          istio.VirtualService.mirror.subset: '{{.MGMT_IMG_TAG_MIRROR}}'
-          istio.temp.VirtualService: '{{.MGMT_ISTIO_TEMP_VIRTUAL_SERVICE}}'
-          istio.temp.allowPolicy: '{{.MGMT_ISTIO_TEMP_POLICY}}'
-          tag: '{{.MGMT_IMG_TAG_DEPLOY}}'
-      flags:
-        global:
-        - --kube-context
-        - gke_nm-prod-global-userdata-hub_us-central1_userdata-hub-istio-1-11-test
-- name: prod-deploy
-  deploy:
-    helm:
-      releases:
-      - name: columbus-mgmt-helm
-        chartPath: ./deploy/columbus-mgmt-helm
-        valuesFiles:
-        - ./deploy/columbus-mgmt-helm/values-prod.yaml
-        setValueTemplates:
-          istio.VirtualService.mirror.subset: '{{.MGMT_IMG_TAG_MIRROR}}'
-          istio.temp.VirtualService: '{{.MGMT_ISTIO_TEMP_VIRTUAL_SERVICE}}'
-          istio.temp.allowPolicy: '{{.MGMT_ISTIO_TEMP_POLICY}}'
-          tag: '{{.MGMT_IMG_TAG_DEPLOY}}'
-      flags:
-        global:
-        - --kube-context
-        - gke_nm-prod-global-userdata-hub_us-central1-a_userdata-hub-istio-1-11

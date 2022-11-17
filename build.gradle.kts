@@ -18,6 +18,8 @@ repositories {
 extra["springCloudVersion"] = "2021.0.5"
 
 dependencies {
+    implementation("com.google.cloud:spring-cloud-gcp-starter")
+    implementation("com.google.cloud:spring-cloud-gcp-starter-storage")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -25,10 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
-//    implementation("org.springframework.cloud:spring-cloud-sleuth-core")
-//    implementation("com.google.cloud:google-cloud-bigtable")
-//    implementation("com.google.cloud:google-cloud-storage")
-//    implementation("com.google.cloud:google-cloud-pubsub")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-core")
     implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -39,6 +38,7 @@ dependencies {
 
 dependencyManagement {
     imports {
+        mavenBom("com.google.cloud:spring-cloud-gcp-dependencies:${property("springCloudGcpVersion")}")
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
 }
