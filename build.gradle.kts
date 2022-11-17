@@ -15,6 +15,7 @@ repositories {
     mavenCentral()
 }
 
+extra["springCloudGcpVersion"] = "3.4.0"
 extra["springCloudVersion"] = "2021.0.5"
 
 dependencies {
@@ -27,7 +28,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
-    implementation("org.springframework.cloud:spring-cloud-sleuth-core")
     implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
