@@ -5,6 +5,7 @@ import com.wooheet.microservices.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters.fromObject
+import org.springframework.web.reactive.function.BodyInserters.fromValue
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse.*
 import org.springframework.web.reactive.function.server.bodyToMono
@@ -16,7 +17,7 @@ class CustomerHandler(val customerService: CustomerService) {
 
     fun get(serverRequest: ServerRequest) =
         customerService.getCustomer(serverRequest.pathVariable("id").toInt())
-            .flatMap { ok().body(fromObject(it)) }
+            .flatMap { ok().body(fromValue(it)) }
             .switchIfEmpty(status(HttpStatus.NOT_FOUND).build())
 
     fun search(serverRequest: ServerRequest) =
@@ -26,9 +27,10 @@ class CustomerHandler(val customerService: CustomerService) {
     fun create(serverRequest: ServerRequest) =
         customerService.createCustomer(serverRequest.bodyToMono()).flatMap {
             created(URI.create("functional/customer/${it.id}")).build()
-        }.onErrorResume(Exception::class) {
-            badRequest().body(fromObject(ErrorResponse("error creating customer",
-            it.message ?: "error")))
+        }.onErrorResume {
+            badRequest().body(fromValue(
+                ErrorResponse("error creating customer",
+            it.message ?: "error"))
+            )
         }
-
 }
