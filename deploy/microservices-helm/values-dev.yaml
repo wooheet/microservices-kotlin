@@ -1,6 +1,6 @@
 profile: dev
-namespace: default
-image: gcr.io/columbus-160105/userdatahub/columbus-mgmt-api-webapp
+namespace: service
+image: gcr.io/columbus-160105/userdatahub/columbus-ms-api-webapp
 tag: latest%100
 replicaCnt: 1
 monitoring:
@@ -20,13 +20,13 @@ monitoring:
       cpu: 200m
       memory: 600Mi
 service:
-  name: mgmt-dev
+  name: ms-dev
   credentials: mgmt-gcp-key
   type: ClusterIP
-  externalPort: 9101
-  internalPort: 9101
+  externalPort: 99101
+  internalPort: 99101
   actuatorPort: 9999
-  internalPortName: mgmt
+  internalPortName: ms
   livenessPath: /health
   readinessPath: /health
   prometheusPath: /actuator/prometheus
@@ -44,10 +44,10 @@ readiness:
   failureThreshold: 3
 resources:
   request:
-    cpu: 500m
+    cpu: 200m
     memory: 1Gi
   limit:
-    cpu: 2000m
+    cpu: 1000m
     memory: 2Gi
 istio:
   proxy:
@@ -56,12 +56,12 @@ istio:
         cpu: 100m
         memory: 128Mi
       limit:
-        cpu: 2000m
+        cpu: 1000m
         memory: 2500Mi
   DestinationRule:
-    host: mgmt-dev
+    host: ms-dev
   VirtualService:
-    host: mgmt-dev.default.svc.cluster.local
+    host: ms-dev.default.svc.cluster.local
     domain: dev-clbs.nmn.io
     timeout: 3s
     mirror:
