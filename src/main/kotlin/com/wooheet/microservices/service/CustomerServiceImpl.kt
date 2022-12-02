@@ -10,8 +10,6 @@ import reactor.kotlin.core.publisher.toMono
 
 @Service
 class CustomerServiceImpl : CustomerService {
-  @Value("\${microservice.config.greetings}")
-  private lateinit var pingpong: String
 
   @Autowired
   lateinit var customerRepository: CustomerRepository

@@ -7,7 +7,7 @@ profiles:
       envTemplate:
         template: '{{.MICROSERVICES_IMG_TAG_BUILD}}'
     artifacts:
-      - image: gcr.io/columbus-160105/userdatahub/microservices-api-webapp
+      - image: gcr.io/columbus-160105/userdatahub/ms-api-webapp
         context: .
         docker:
           dockerfile: Dockerfile
