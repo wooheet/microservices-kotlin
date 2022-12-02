@@ -1,44 +1,44 @@
-columbus:
-  bigquery:
-    partition-dataset: userdata_hub_partition_segments_dev
-  profile:
-    api-key: AIzaSyB_JXP4EkOqn08OBQ9gZgDDlyNCuI65zRQ
-feign:
-  columbus-mgmt-api:
-    url: http://mgmt-dev.default.svc.cluster.local:9101
-  columbus-trigger-api:
-    url: http://trigger-dev.service.svc.cluster.local:9202
-  columbus-data-api:
-    url: http://columbus-data-api-dev.data.svc.cluster.local:9301
-  nais-api:
-    url: https://nais-api-public.nmn.io
-  gmeta-api:
-    url: http://gmeta.netmarble.com
-logging:
-  pretty-print: false
-management:
-  server:
-    port: 9999
-gcp:
-  config:
-    bigquery:
-      dataset: user_labels_dev
-okta:
-  oauth2:
-    client-id: ENC(X+HeZXdEDdxFx2nUikN8CHwEPO2tF30QHV08/3Canvg=)
-    client-secret: ENC(tzSTtu9QNlZDTvKKxSgI6fex30ia7dr0/m+78Uf6wZo8XnJpIUJYrViB2IzTndHLEzrgzSv+o5g=)
-    issuer: https://sso.nmn.io
-    logout-uri: https://dev-clbs.nmn.io/dashboard
-spring:
-  application:
-    name: dashboard-dev
-  config:
-    import : "zookeeper:zk-cs.default.svc.cluster.local:2181"
-    activate:
-      on-profile: dev
-  redis:
-    host: redis-cluster.default.svc.cluster.local
-    port: 6379
-  session:
-    store-type: redis
-    timeout: 86400
+#columbus:
+#  bigquery:
+#    partition-dataset: userdata_hub_partition_segments_dev
+#  profile:
+#    api-key: AIzaSyB_JXP4EkOqn08OBQ9gZgDDlyNCuI65zRQ
+#feign:
+#  columbus-mgmt-api:
+#    url: http://mgmt-dev.default.svc.cluster.local:9101
+#  columbus-trigger-api:
+#    url: http://trigger-dev.service.svc.cluster.local:9202
+#  columbus-data-api:
+#    url: http://columbus-data-api-dev.data.svc.cluster.local:9301
+#  nais-api:
+#    url: https://nais-api-public.nmn.io
+#  gmeta-api:
+#    url: http://gmeta.netmarble.com
+#logging:
+#  pretty-print: false
+#management:
+#  server:
+#    port: 9999
+#gcp:
+#  config:
+#    bigquery:
+#      dataset: user_labels_dev
+#okta:
+#  oauth2:
+#    client-id: ENC(X+HeZXdEDdxFx2nUikN8CHwEPO2tF30QHV08/3Canvg=)
+#    client-secret: ENC(tzSTtu9QNlZDTvKKxSgI6fex30ia7dr0/m+78Uf6wZo8XnJpIUJYrViB2IzTndHLEzrgzSv+o5g=)
+#    issuer: https://sso.nmn.io
+#    logout-uri: https://dev-clbs.nmn.io/dashboard
+#spring:
+#  application:
+#    name: dashboard-dev
+#  config:
+#    import : "zookeeper:zk-cs.default.svc.cluster.local:2181"
+#    activate:
+#      on-profile: dev
+#  redis:
+#    host: redis-cluster.default.svc.cluster.local
+#    port: 6379
+#  session:
+#    store-type: redis
+#    timeout: 86400

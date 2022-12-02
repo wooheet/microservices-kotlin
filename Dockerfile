@@ -1,27 +1,57 @@
-FROM gradle:7.5-jdk-alpine
+#FROM adoptopenjdk:11-jdk-hotspot AS builder
+#
+#COPY gradlew .
+#COPY gradle gradle
+#COPY build.gradle.kts .
+#COPY settings.gradle.kts .
+#COPY src src
+#
+#RUN chmod +x ./gradlew
+#RUN ./gradlew bootJar
+#
+#FROM adoptopenjdk:11-jdk-hotspot
+#ARG JAR_FILE=build/libs/*.jar
+#ARG ENVIRONMENT
+#
+#COPY --from=builder ${JAR_FILE} app.jar
+#
+#ENV SPRING_PROFILES_ACTIVE=$P{ENVIRONMENT}
+#
+#EXPOSE 8080
+#ENTRYPOINT ["java", "-jar", "/app.jar"]
 
-WORKDIR /app
 
-COPY build.gradle.kts ./
+### build stage ###
+FROM adoptopenjdk:11-jdk-hotspot AS builder
 
-COPY .git /app/.git
-COPY src  /app/src
+# set arg
+ARG WORKSPACE=/home/app
+ARG BUILD_TARGET=${WORKSPACE}/build/libs
+WORKDIR ${WORKSPACE}
 
-RUN gradle clean build --no-daemon
+# copy code & build
+COPY . .
+RUN ./gradlew clean bootJar
 
-FROM gcr.io/columbus-160105/base/ubuntu1804_jdk11:2022-09-13
-MAINTAINER woohaewon woohaewon@netmarble.com
-RUN groupadd -r -g 2001 appuser && useradd -r -u 1001 -g appuser appuser
-RUN mkdir /home/appuser && chown appuser /home/appuser
-USER appuser
-
-# Copy the compiled files over.
-COPY --chown=appuser:appuser ./ObjectSizer.jar /home/appuser/ObjectSizer.jar
-COPY --chown=appuser:appuser --from=build-env /app/target/*shaded.jar /home/appuser/app.jar
+# unpack jar
+WORKDIR ${BUILD_TARGET}
+RUN jar -xf *.jar
 
 
-ENV JAVA_OPTS=""
-ENV JAVA_GCLOG_OPTS=""
-ENV SPRING_PROFILE="docker-local"
+### create image stage ###
+FROM adoptopenjdk:11-jdk-hotspot
 
-ENTRYPOINT exec java $JAVA_OPTS $JAVA_GCLOG_OPTS -Dspring.profiles.active=$SPRING_PROFILE -Djava.security.egd=file:/dev/./urandom -javaagent:/home/appuser/ObjectSizer.jar -jar /home/appuser/app.jar
+ARG WORKSPACE=/home/app
+ARG BUILD_TARGET=${WORKSPACE}/build/libs
+ARG DEPLOY_PATH=${WORKSPACE}/deploy
+
+# copy from build stage
+COPY --from=builder ${BUILD_TARGET}/org ${DEPLOY_PATH}/org
+COPY --from=builder ${BUILD_TARGET}/BOOT-INF/lib ${DEPLOY_PATH}/BOOT-INF/lib
+COPY --from=builder ${BUILD_TARGET}/META-INF ${DEPLOY_PATH}/META-INF
+COPY --from=builder ${BUILD_TARGET}/BOOT-INF/classes ${DEPLOY_PATH}/BOOT-INF/classes
+
+WORKDIR ${DEPLOY_PATH}
+
+EXPOSE 8080/tcp
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

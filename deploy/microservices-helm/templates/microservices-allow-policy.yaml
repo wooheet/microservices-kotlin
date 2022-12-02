@@ -12,7 +12,7 @@ spec:
     - to:
         - operation:
             methods: ["GET"]
-            paths: ["/health"]
+            paths: ["/ping"]
     - to:
         - operation:
             methods: ["GET"]
@@ -26,11 +26,11 @@ spec:
             {{- end }}
       to:
         - operation:
-            paths: ["/mgmt/*"]
+            paths: ["/ms/*"]
     - from:
         - source:
             namespaces:
-              - default
+              - service
     - to:
         - operation:
-            paths: ["/mgmt/*"]
+            paths: ["/ms/*"]

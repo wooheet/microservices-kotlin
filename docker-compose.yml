@@ -11,3 +11,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - /data/mongodb/data/db:/data/db
+  application:
+    container_name: ms
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8989:8989"
+    depends_on:
+      - mongodb

@@ -23,8 +23,8 @@ service:
   name: ms-dev
   credentials: mgmt-gcp-key
   type: ClusterIP
-  externalPort: 99101
-  internalPort: 99101
+  externalPort: 8989
+  internalPort: 8989
   actuatorPort: 9999
   internalPortName: ms
   livenessPath: /health
