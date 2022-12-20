@@ -53,5 +53,5 @@ COPY --from=builder ${BUILD_TARGET}/BOOT-INF/classes ${DEPLOY_PATH}/BOOT-INF/cla
 
 WORKDIR ${DEPLOY_PATH}
 
-EXPOSE 8080/tcp
+#EXPOSE 9099/tcp
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

@@ -1,23 +1,26 @@
-version: "3"
+version: "3.7"
 services:
   mongodb:
     image: mongo
     restart: always
     container_name: mongodb
+    command: mongod --auth
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: haewon
-      MONGO_INITDB_ROOT_PASSWORD: password
+      - MONGO_INITDB_DATABASE=microservices
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - /data/mongodb/data/db:/data/db
   application:
-    container_name: ms
+    image: ms-dev
     restart: on-failure
+    container_name: ms-dev
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "8989:8989"
+      - "9099:9099"
     depends_on:
       - mongodb

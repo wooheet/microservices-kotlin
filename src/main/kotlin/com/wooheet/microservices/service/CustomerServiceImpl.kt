@@ -19,4 +19,6 @@ class CustomerServiceImpl : CustomerService {
   override fun deleteCustomer(id: Int) = customerRepository.deleteById(id).map { it.deletedCount > 0 }
   override fun searchCustomers(nameFilter: String) = customerRepository.findCustomer(nameFilter)
 
+  override fun getAllCustomers() = customerRepository.findAll()
+
 }

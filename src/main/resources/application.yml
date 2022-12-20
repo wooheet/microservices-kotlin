@@ -42,15 +42,24 @@ spring:
     default: dev
   data:
     mongodb:
-      uri: "mongodb://haewon:password@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-1"
-      database: "microservices"
-eureka:
-  client:
-    healthcheck:
-      enabled: true
+      authentication-database: admin
+      uri: "mongodb://admin:password@localhost:27017/microservices?authSource=admin&authMechanism=SCRAM-SHA-1"
+server:
+  port: 9099
 spring.jackson.default-property-inclusion: NON_NULL
 
+management:
+  endpoints:
+    web:
+      base-path: "/management"
+      exposure:
+        include: health, metrics, trace
+  server:
+    port: 8089
 
-microservice:
-  config:
-    greetings: "greetings microservices application service test"
+#eureka:
+#  client:
+#    healthcheck:
+#      enabled: true
+
+

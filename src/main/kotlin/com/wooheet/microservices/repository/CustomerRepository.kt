@@ -2,13 +2,10 @@ package com.wooheet.microservices.repository
 
 import com.wooheet.microservices.domain.Customer
 import com.wooheet.microservices.domain.Telephone
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate
-import org.springframework.data.mongodb.core.find
-import org.springframework.data.mongodb.core.findById
+import org.springframework.data.mongodb.core.*
 import org.springframework.data.mongodb.core.query.Criteria.where
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.isEqualTo
-import org.springframework.data.mongodb.core.remove
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
@@ -33,4 +30,5 @@ class CustomerRepository(private val template: ReactiveMongoTemplate) {
   fun deleteById(id: Int) = template.remove<Customer>(Query(where("_id").isEqualTo(id)))
   fun findCustomer(nameFilter: String) = template.find<Customer>(
       Query(where("name").regex(".*$nameFilter.*", "i")))
+  fun findAll() = template.findAll(Customer::class.java)
 }
