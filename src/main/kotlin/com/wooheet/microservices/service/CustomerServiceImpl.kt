@@ -1,24 +1,20 @@
 package com.wooheet.microservices.service
 
 import com.wooheet.microservices.domain.Customer
-import com.wooheet.microservices.repository.CustomerRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
-import reactor.kotlin.core.publisher.toMono
+import java.util.concurrent.ConcurrentHashMap
 
 @Service
 class CustomerServiceImpl : CustomerService {
 
-  @Autowired
-  lateinit var customerRepository: CustomerRepository
+  companion object {
+    private val initialCustomers = arrayOf(Customer(1, "Kotlin"),
+      Customer(2, "Spring"),
+      Customer(3, "Microservice")
+    )
+    private val customers = ConcurrentHashMap<Int, Customer>(initialCustomers.associateBy(Customer::id))
+  }
 
-  override fun getCustomer(id: Int) = customerRepository.findById(id)
-  override fun createCustomer(customer: Mono<Customer>) = customerRepository.create(customer)
-  override fun deleteCustomer(id: Int) = customerRepository.deleteById(id).map { it.deletedCount > 0 }
-  override fun searchCustomers(nameFilter: String) = customerRepository.findCustomer(nameFilter)
-
-  override fun getAllCustomers() = customerRepository.findAll()
-
+  override fun getCustomer(id: Int) = customers[id]
+  override fun getAllCustomers() = customers.map(Map.Entry<Int, Customer>::value).toList()
 }
