@@ -1,7 +1,7 @@
-package com.wooheet.microservices.repository
+package com.wooheet.microservices.repository.customers
 
-import com.wooheet.microservices.domain.Customer
-import com.wooheet.microservices.domain.Telephone
+import com.wooheet.microservices.domains.customers.model.Customer
+import com.wooheet.microservices.domains.customers.model.Telephone
 import org.springframework.data.mongodb.core.*
 import org.springframework.data.mongodb.core.query.Criteria.where
 import org.springframework.data.mongodb.core.query.Query
@@ -18,7 +18,8 @@ class CustomerRepository(private val template: ReactiveMongoTemplate) {
     val initialCustomers = listOf(
         Customer(1, "Kotlin"),
         Customer(2, "Spring"),
-        Customer(3, "Microservice", Telephone("+82", "7123456789")))
+        Customer(3, "Microservice", Telephone("+82", "7123456789"))
+    )
   }
 
   @PostConstruct

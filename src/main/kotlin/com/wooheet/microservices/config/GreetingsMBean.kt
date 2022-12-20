@@ -1,6 +1,6 @@
 package com.wooheet.microservices.config
 
-import com.wooheet.microservices.service.GreetingsService
+import com.wooheet.microservices.services.greetings.GreetingsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jmx.export.annotation.ManagedOperation
 import org.springframework.jmx.export.annotation.ManagedOperationParameter

@@ -1,19 +1,15 @@
-package com.wooheet.microservices.handler
+package com.wooheet.microservices.handler.customers
 
 
-import com.wooheet.microservices.domain.Customer
-import com.wooheet.microservices.service.CustomerService
-import org.springframework.beans.factory.annotation.Value
+import com.wooheet.microservices.domains.customers.model.Customer
+import com.wooheet.microservices.services.cusmers.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters.fromValue
 import org.springframework.web.reactive.function.server.ServerRequest
-import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.ServerResponse.*
 import org.springframework.web.reactive.function.server.bodyToMono
-import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
-import java.net.URI
 
 @Component
 class CustomerHandler(val customerService: CustomerService) {

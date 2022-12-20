@@ -1,12 +1,10 @@
-package com.wooheet.microservices.service
+package com.wooheet.microservices.services.cusmers
 
-import com.wooheet.microservices.domain.Customer
-import com.wooheet.microservices.repository.CustomerRepository
+import com.wooheet.microservices.domains.customers.model.Customer
+import com.wooheet.microservices.repository.customers.CustomerRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
-import reactor.kotlin.core.publisher.toMono
 
 @Service
 class CustomerServiceImpl : CustomerService {

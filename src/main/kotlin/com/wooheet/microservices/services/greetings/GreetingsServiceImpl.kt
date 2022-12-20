@@ -1,6 +1,5 @@
-package com.wooheet.microservices
+package com.wooheet.microservices.services.greetings
 
-import com.wooheet.microservices.service.GreetingsService
 import org.springframework.stereotype.Service
 import java.util.*
 

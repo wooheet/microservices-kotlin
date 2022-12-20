@@ -53,7 +53,8 @@ management:
     web:
       base-path: "/management"
       exposure:
-        include: health, metrics, trace
+#        include: health, metrics, trace, info, beans
+        include: "*"
   server:
     port: 8089
 

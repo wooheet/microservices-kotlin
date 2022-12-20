@@ -1,6 +1,6 @@
 //package com.wooheet.microservices.repository
 //
-//import com.wooheet.microservices.domain.Customer
+//import com.wooheet.microservices.domain.customers.model.Customer
 //import org.springframework.beans.factory.annotation.Autowired
 //import org.springframework.data.mongodb.core.ReactiveMongoOperations
 //import org.springframework.stereotype.Component

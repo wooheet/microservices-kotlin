@@ -1,6 +1,6 @@
-package com.wooheet.microservices.service
+package com.wooheet.microservices.services.cusmers
 
-import com.wooheet.microservices.domain.Customer
+import com.wooheet.microservices.domains.customers.model.Customer
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 

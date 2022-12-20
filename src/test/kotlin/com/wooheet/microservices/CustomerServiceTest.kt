@@ -1,11 +1,8 @@
 package com.wooheet.microservices
 
-import com.wooheet.microservices.handler.CustomerHandler
+import com.wooheet.microservices.handler.customers.CustomerHandler
 import com.wooheet.microservices.route.CustomerRouter
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
-import com.wooheet.microservices.service.CustomerService
-import org.amshove.kluent.*
+import com.wooheet.microservices.services.cusmers.CustomerService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
