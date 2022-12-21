@@ -1,8 +1,12 @@
 package com.wooheet.microservices
 
+import com.wooheet.microservices.domains.customers.model.Customer
 import com.wooheet.microservices.services.cusmers.CustomerService
+import org.amshove.kluent.*
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.reset
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -36,8 +40,8 @@ infix fun MockMvc.`do a get request to`(uri: String) = this.perform(get(uri))
 @SpringBootTest
 @AutoConfigureMockMvc
 class CustomerControllerTest {
-//  @Autowired
-//  lateinit var mockMvc: MockMvc
+  @Autowired
+  lateinit var mockMvc: MockMvc
 
   @MockBean
   lateinit var customerService: CustomerService
@@ -59,8 +63,8 @@ class CustomerControllerTest {
 //    reset(customerService)
   }
 
-//  @Test
-//  fun `we should GET a list of customers`() {
+  @Test
+  fun `we should GET a list of customers`() {
 //    When calling customerService.getAllCustomers() `it returns`
 //        listOf(Customer(1, "test"), Customer(2, "mocks"))
 //
@@ -76,6 +80,6 @@ class CustomerControllerTest {
 //    `Verify no further interactions` on customerService
 //
 //    reset(customerService)
-//  }
+  }
 }
 
