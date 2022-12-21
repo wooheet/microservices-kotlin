@@ -2,12 +2,13 @@ package com.wooheet.microservices
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import java.util.*
 
 @SpringBootApplication
 class MicroservicesApplication
 
 fun lower(name: String): String {
-    val lower = name.toLowerCase()
+    val lower = name.lowercase(Locale.getDefault())
     return "$name in lower case is: $lower"
 }
 
